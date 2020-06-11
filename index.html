@@ -5336,55 +5336,153 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
+var $author$project$Main$Model = F2(
+	function (hover, previews) {
+		return {hover: hover, previews: previews};
+	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
-	return _Utils_Tuple2(_List_Nil, $elm$core$Platform$Cmd$none);
+	return _Utils_Tuple2(
+		A2($author$project$Main$Model, false, _List_Nil),
+		$elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
+var $author$project$Main$GotFiles = F2(
+	function (a, b) {
+		return {$: 'GotFiles', a: a, b: b};
+	});
+var $author$project$Main$GotPreviews = function (a) {
+	return {$: 'GotPreviews', a: a};
+};
+var $elm$time$Time$Posix = function (a) {
+	return {$: 'Posix', a: a};
+};
+var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
+var $elm$file$File$Select$files = F2(
+	function (mimes, toMsg) {
+		return A2(
+			$elm$core$Task$perform,
+			function (_v0) {
+				var f = _v0.a;
+				var fs = _v0.b;
+				return A2(toMsg, f, fs);
+			},
+			_File_uploadOneOrMore(mimes));
+	});
+var $elm$file$File$toUrl = _File_toUrl;
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		var files = msg.a;
-		return _Utils_Tuple2(files, $elm$core$Platform$Cmd$none);
+		switch (msg.$) {
+			case 'Pick':
+				return _Utils_Tuple2(
+					model,
+					A2(
+						$elm$file$File$Select$files,
+						_List_fromArray(
+							['image/*']),
+						$author$project$Main$GotFiles));
+			case 'DragEnter':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{hover: true}),
+					$elm$core$Platform$Cmd$none);
+			case 'DragLeave':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{hover: false}),
+					$elm$core$Platform$Cmd$none);
+			case 'GotFiles':
+				var file = msg.a;
+				var files = msg.b;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{hover: false}),
+					A2(
+						$elm$core$Task$perform,
+						$author$project$Main$GotPreviews,
+						$elm$core$Task$sequence(
+							A2(
+								$elm$core$List$map,
+								$elm$file$File$toUrl,
+								A2($elm$core$List$cons, file, files)))));
+			default:
+				var urls = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{previews: urls}),
+					$elm$core$Platform$Cmd$none);
+		}
 	});
-var $author$project$Main$GotFiles = function (a) {
-	return {$: 'GotFiles', a: a};
-};
+var $author$project$Main$DragEnter = {$: 'DragEnter'};
+var $author$project$Main$DragLeave = {$: 'DragLeave'};
+var $author$project$Main$Pick = {$: 'Pick'};
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
 	});
-var $elm$time$Time$Posix = function (a) {
-	return {$: 'Posix', a: a};
-};
-var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
 var $elm$file$File$decoder = _File_decoder;
+var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $elm$json$Json$Decode$list = _Json_decodeList;
-var $author$project$Main$filesDecoder = A2(
+var $elm$json$Json$Decode$fail = _Json_fail;
+var $elm$json$Json$Decode$oneOrMoreHelp = F2(
+	function (toValue, xs) {
+		if (!xs.b) {
+			return $elm$json$Json$Decode$fail('a ARRAY with at least ONE element');
+		} else {
+			var y = xs.a;
+			var ys = xs.b;
+			return $elm$json$Json$Decode$succeed(
+				A2(toValue, y, ys));
+		}
+	});
+var $elm$json$Json$Decode$oneOrMore = F2(
+	function (toValue, decoder) {
+		return A2(
+			$elm$json$Json$Decode$andThen,
+			$elm$json$Json$Decode$oneOrMoreHelp(toValue),
+			$elm$json$Json$Decode$list(decoder));
+	});
+var $author$project$Main$dropDecoder = A2(
 	$elm$json$Json$Decode$at,
 	_List_fromArray(
-		['target', 'files']),
-	$elm$json$Json$Decode$list($elm$file$File$decoder));
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
+		['dataTransfer', 'files']),
+	A2($elm$json$Json$Decode$oneOrMore, $author$project$Main$GotFiles, $elm$file$File$decoder));
+var $author$project$Main$hijack = function (msg) {
+	return _Utils_Tuple2(msg, true);
+};
+var $elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
+	return {$: 'MayPreventDefault', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$preventDefaultOn = F2(
+	function (event, decoder) {
 		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayPreventDefault(decoder));
 	});
-var $elm$html$Html$Attributes$multiple = $elm$html$Html$Attributes$boolProperty('multiple');
+var $author$project$Main$hijackOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$html$Html$Events$preventDefaultOn,
+			event,
+			A2($elm$json$Json$Decode$map, $author$project$Main$hijack, decoder));
+	});
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$on = F2(
 	function (event, decoder) {
 		return A2(
@@ -5392,44 +5490,83 @@ var $elm$html$Html$Events$on = F2(
 			event,
 			$elm$virtual_dom$VirtualDom$Normal(decoder));
 	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$core$Debug$toString = _Debug_toString;
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $author$project$Main$viewPreview = function (url) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'width', '60px'),
+				A2($elm$html$Html$Attributes$style, 'height', '60px'),
+				A2($elm$html$Html$Attributes$style, 'background-image', 'url(\'' + (url + '\')')),
+				A2($elm$html$Html$Attributes$style, 'background-position', 'center'),
+				A2($elm$html$Html$Attributes$style, 'background-repeat', 'no-repeat'),
+				A2($elm$html$Html$Attributes$style, 'background-size', 'contain')
+			]),
+		_List_Nil);
+};
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$input,
+				$elm$html$Html$Attributes$style,
+				'border',
+				model.hover ? '6px dashed purple' : '6px dashed #ccc'),
+				A2($elm$html$Html$Attributes$style, 'border-radius', '20px'),
+				A2($elm$html$Html$Attributes$style, 'width', '480px'),
+				A2($elm$html$Html$Attributes$style, 'margin', '100px auto'),
+				A2($elm$html$Html$Attributes$style, 'padding', '40px'),
+				A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+				A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
+				A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+				A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+				A2(
+				$author$project$Main$hijackOn,
+				'dragenter',
+				$elm$json$Json$Decode$succeed($author$project$Main$DragEnter)),
+				A2(
+				$author$project$Main$hijackOn,
+				'dragover',
+				$elm$json$Json$Decode$succeed($author$project$Main$DragEnter)),
+				A2(
+				$author$project$Main$hijackOn,
+				'dragleave',
+				$elm$json$Json$Decode$succeed($author$project$Main$DragLeave)),
+				A2($author$project$Main$hijackOn, 'drop', $author$project$Main$dropDecoder)
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$button,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('file'),
-						$elm$html$Html$Attributes$multiple(true),
-						A2(
-						$elm$html$Html$Events$on,
-						'change',
-						A2($elm$json$Json$Decode$map, $author$project$Main$GotFiles, $author$project$Main$filesDecoder))
+						$elm$html$Html$Events$onClick($author$project$Main$Pick)
 					]),
-				_List_Nil),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Upload Images')
+					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(
-						$elm$core$Debug$toString(model))
-					]))
+						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+						A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+						A2($elm$html$Html$Attributes$style, 'height', '60px'),
+						A2($elm$html$Html$Attributes$style, 'padding', '20px')
+					]),
+				A2($elm$core$List$map, $author$project$Main$viewPreview, model.previews))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
