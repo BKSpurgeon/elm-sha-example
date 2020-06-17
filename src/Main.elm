@@ -75,7 +75,7 @@ update msg model =
             , (file :: files)
                 |> List.map
                     (File.toBytes
-                        >> Task.map (SHA1.fromBytes >> SHA1.toBase64)
+                        >> Task.map (SHA1.fromBytes >> SHA1.toHex)
                     )
                 |> Task.sequence
                 |> Task.perform GotShas

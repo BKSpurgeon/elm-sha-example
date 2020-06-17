@@ -520,19 +520,19 @@
 	"buffers":
 	[
 		{
-			"file": "src/Main.elm",
+			"file": "/home/koshy/Documents/www/elm_projects/md5html/src/Main.elm",
 			"settings":
 			{
-				"buffer_size": 2753,
+				"buffer_size": 10068,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": ".gitignore",
+			"file": "src/Main.elm",
 			"settings":
 			{
-				"buffer_size": 48,
+				"buffer_size": 3328,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -657,10 +657,13 @@
 	"expanded_folders":
 	[
 		"/home/koshy/Documents/www/elm_projects/elm-sha-example",
+		"/home/koshy/Documents/www/elm_projects/elm-sha-example/elm-stuff",
 		"/home/koshy/Documents/www/elm_projects/elm-sha-example/src"
 	],
 	"file_history":
 	[
+		"/home/koshy/Documents/www/elm_projects/elm-sha-example/.gitignore",
+		"/home/koshy/Documents/www/elm_projects/md5html/elm.json",
 		"/home/koshy/Documents/www/elm_projects/elm-sha-example/src/Main.elm",
 		"/home/koshy/Documents/www/BensRails/pro_connect/app/views/message_mailer/recipients_notification.text.erb",
 		"/home/koshy/Documents/www/BensRails/pro_connect/app/views/message_mailer/recipients_notification.html.erb",
@@ -786,9 +789,7 @@
 		"/home/koshy/Documents/www/BensRails/payslip/db/migrate/20191222065247_create_employees.rb",
 		"/home/koshy/Documents/www/BensRails/payslip/app/views/employees/new.html.erb",
 		"/home/koshy/Documents/www/BensRails/payslip/db/migrate/20191111174523_create_users.rb",
-		"/home/koshy/Documents/www/BensRails/payslip/app/models/user.rb",
-		"/home/koshy/Documents/www/BensRails/payslip/app/models/level.rb",
-		"/home/koshy/Documents/www/BensRails/payslip/scaffolds/4-employee"
+		"/home/koshy/Documents/www/BensRails/payslip/app/models/user.rb"
 	],
 	"find":
 	{
@@ -815,6 +816,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"previews",
+			"urls",
+			"url",
+			"GotPreviews",
 			"=\n",
 			"REDIS_URL",
 			"rack",
@@ -926,24 +931,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/Main.elm",
+					"file": "/home/koshy/Documents/www/elm_projects/md5html/src/Main.elm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2753,
+						"buffer_size": 10068,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								231,
-								231
+								5086,
+								5086
 							]
 						],
 						"settings":
@@ -953,12 +958,27 @@
 							{
 								"close":
 								{
+									"1":
+									[
+										5085,
+										5086
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/square_bracket.png",
+										"region.bluish"
+									]
 								},
 								"open":
 								{
+									"1":
+									[
+										5084,
+										5085
+									]
 								},
 								"unmatched":
 								{
@@ -1024,31 +1044,31 @@
 							],
 							"keep_blank_lines": null,
 							"syntax": "Packages/Elm Syntax Highlighting/src/elm.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"tab_size": null,
+							"translate_tabs_to_spaces": null
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4446.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": ".gitignore",
+					"file": "src/Main.elm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 48,
+						"buffer_size": 3328,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								48,
-								48
+								3252,
+								3252
 							]
 						],
 						"settings":
@@ -1058,12 +1078,27 @@
 							{
 								"close":
 								{
+									"1":
+									[
+										3263,
+										3264
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
+									]
 								},
 								"open":
 								{
+									"1":
+									[
+										3242,
+										3243
+									]
 								},
 								"unmatched":
 								{
@@ -1128,15 +1163,15 @@
 								"bh_round_content"
 							],
 							"keep_blank_lines": null,
-							"syntax": "Packages/Git Formats/Git Ignore.sublime-syntax",
+							"syntax": "Packages/Elm Syntax Highlighting/src/elm.sublime-syntax",
 							"tab_size": null,
 							"translate_tabs_to_spaces": null
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2776.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1720,16 +1755,16 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "pro",
 		"selected_items":
 		[
 			[
-				"",
-				"~/Documents/www/OpenSourceProjects/BKSpurgeon blog.sublime-project"
-			],
-			[
 				"pro",
 				"~/Documents/www/BensRails/pro-connect-documentation/pro-connct.sublime-project"
+			],
+			[
+				"",
+				"~/Documents/www/OpenSourceProjects/BKSpurgeon blog.sublime-project"
 			],
 			[
 				"html",
